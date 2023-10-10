@@ -10,4 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*#include <ctype.h>
+#include <stdio.h>*/
 
+int	ft_isalpha(char str)
+{
+    int	type;
+
+    if (str >= 65 && str <= 90)
+        type = 1;
+    else if (str >= 97 && str <= 122)
+        type = 2;
+    else
+        type = 0;
+    return (type);
+}
+/*
+int	main(int arg, char *args[])
+{
+	if (arg == 2)
+	{
+		printf("%i", ft_isalpha(*args[1]));
+	}
+	return (0);
+}*/

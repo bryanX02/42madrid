@@ -10,4 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctype.h>
+#include <stdio.h>
 
+int	ft_isalnum(char str)
+{
+    int	boolean;
+
+    boolean = 1;
+    if (!((str >= 65 && str <= 90) || (str >= 97 && str <= 122) || (str >= 48 && str <= 57)))
+        boolean = 0;
+    return (boolean);
+}
+
+int	main(int arg, char *args[])
+{
+    if (arg == 2)
+        printf("%i", ft_isalnum(*args[1]));
+    return (0);
+}

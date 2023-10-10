@@ -10,4 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*#include <ctype.h>
+#include <stdio.h>*/
 
+int	ft_isdigit(char str)
+{
+    int	boolean;
+
+    boolean = 1;
+    if (!(str >= 48 && str <= 57))
+            boolean = 0;
+    return (boolean);
+}
+
+/*int	main(int arg, char *args[])
+{
+    if (arg == 2)
+        printf("%i", ft_isdigit(*args[1]));
+    return (0);
+}*/
