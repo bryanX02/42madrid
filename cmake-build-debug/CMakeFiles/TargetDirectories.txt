@@ -1,3 +1,0 @@
-C:/Users/bryan/GitHubRepos/cursus/cmake-build-debug/CMakeFiles/cursus.dir
-C:/Users/bryan/GitHubRepos/cursus/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/bryan/GitHubRepos/cursus/cmake-build-debug/CMakeFiles/rebuild_cache.dir
