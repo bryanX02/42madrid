@@ -10,4 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
+// ¿hay que comprobar que si apunta a algo? -> if (!s)
+void    ft_bzero(void *block, size_t size)
+{
+	size_t  ite;
+	char    *c;
+
+	if (block)
+	{
+
+		ite = 0;
+
+		while (ite < size)
+		{
+			c = block + ite;
+			*c = 0;
+			ite++;
+		}
+	}
+}
 

@@ -13,7 +13,7 @@
 /*#include <ctype.h>
 #include <stdio.h>*/
 
-int	ft_isdigit(char str)
+int	ft_isdigit(int c)
 {
     int	boolean;
 

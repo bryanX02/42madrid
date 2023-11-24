@@ -10,4 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_str_is_printable(int c)
+{
+	int	boolean;
 
+	boolean = 0;
+	if (c >= 32 && c <= 126)
+		boolean = 1;
+	return (boolean);
+}

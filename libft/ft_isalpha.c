@@ -17,12 +17,9 @@ int	ft_isalpha(char str)
 {
     int	type;
 
-    if (str >= 65 && str <= 90)
+	type = 0;
+    if ((str >= 65 && str <= 90) || (str >= 97 && str <= 122))
         type = 1;
-    else if (str >= 97 && str <= 122)
-        type = 2;
-    else
-        type = 0;
     return (type);
 }
 /*

@@ -10,4 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
+void    *ft_memcpy(void *restrict to, const void *restrict from, size_t size)
+{
+	size_t	i;
+
+	if (!to)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		*(char*)(to + i) = *(char*)(from + i);
+		i++;
+	}
+	return (to);
+}

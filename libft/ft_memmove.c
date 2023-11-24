@@ -10,4 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
+void
+*ft_memmove(void *to, const void *from, size_t size)
+{
+	int	i;
+
+	if (!to || !from)
+		return (NULL);
+	if (to > from)
+	{
+		i = (int)size - 1;
+		while (i >= 0)
+		{
+			*(char*)(to + i) = *(char*)(from + i);
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int)size)
+		{
+			*(char*)(to + i) = *(char*)(from + i);
+			i++;
+		}
+	}
+	return (to);
+}

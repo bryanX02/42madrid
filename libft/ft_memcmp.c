@@ -10,4 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
+int ft_memcmp(const void *a1, const void *a2, size_t size)
+{
+	size_t			i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (*(unsigned char*)(a1 + i) != *(unsigned char*)(a2 + i))
+			return (*(unsigned char*)(a1 + i) - *(unsigned char*)(a2 + i));
+		i++;
+	}
+	return (0);
+}
