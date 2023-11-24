@@ -6,17 +6,16 @@
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:33:11 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/09/14 15:33:13 by bquilumb         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:17:58 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isascii(int c)
+int	ft_isascii(int c)
 {
-	int boolean;
+	int	boolean;
 
 	boolean = 0;
 	if (c >= 0 && c < 128)
 		boolean = 1;
-
-	return boolean;
+	return (boolean);
 }

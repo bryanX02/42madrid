@@ -6,7 +6,7 @@
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:32:54 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/09/14 15:32:56 by bquilumb         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:15:48 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_isalnum(int c)
 {
-    int	boolean;
+	int	boolean;
 
-    boolean = 0;
-    if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57))
-        boolean = 1;
-    return (boolean);
+	boolean = 0;
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57))
+		boolean = 1;
+	return (boolean);
 }
