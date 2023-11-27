@@ -6,23 +6,23 @@
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:34:18 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/24 14:58:50 by bquilumb         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:07:40 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	ft_bzero(void *block, size_t size)
+void	ft_bzero(void *s, size_t n)
 {
 	size_t	ite;
 	char	*c;
 
-	if (block)
+	if (s)
 	{
 		ite = 0;
-		while (ite < size)
+		while (ite < n)
 		{
-			c = block + ite;
+			c = s + ite;
 			*c = 0;
 			ite++;
 		}

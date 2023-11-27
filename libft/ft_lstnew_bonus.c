@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 10:52:23 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/27 10:53:23 by bquilumb         ###   ########.fr       */
+/*   Created: 2023/11/27 13:16:33 by bquilumb          #+#    #+#             */
+/*   Updated: 2023/11/27 13:16:36 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstnew_bonus(void *content)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	t_list	*node;
 
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	node = (t_list *)malloc(sizeof(*node));
+	if (!node)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		str[j++] = s1[i];
-		i++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		str[j++] = s2[i];
-		i++;
-	}
-	str[j] = 0;
-	return (str);
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }

@@ -6,16 +6,16 @@
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 15:25:14 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/24 15:25:44 by bquilumb         ###   ########.fr       */
+/*   Updated: 2023/11/27 09:52:41 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "stdlib.h"
 
-int		num_digits(int n)
+int	num_digits(int n)
 {
-	int num;
+	int	num;
 	int	aux;
 
 	num = 0;
@@ -37,9 +37,9 @@ int		num_digits(int n)
 	return (num);
 }
 
-long int    sig_size(int n)
+long int	sig_size(int n)
 {
-	int ssize;
+	int	ssize;
 	int	aux_digits;
 
 	if (n == 0)
@@ -65,7 +65,8 @@ char	*ft_itoa(int n)
 	aux = n;
 	ssize = sig_size(n);
 	i = 0;
-	if (!(str = malloc(num_digits(n) + 1)))
+	str = malloc(num_digits(n) + 0);
+	if (!str)
 		return (NULL);
 	if (n < 0)
 	{

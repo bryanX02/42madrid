@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 10:52:23 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/27 10:53:23 by bquilumb         ###   ########.fr       */
+/*   Created: 2023/11/27 13:16:09 by bquilumb          #+#    #+#             */
+/*   Updated: 2023/11/27 13:16:13 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstmap_bonus(t_list *lst, void *(*f)(void*), void (*del)(void *))
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	t_list	*front;
+	t_list	*aux;
 
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	if (!f || !del)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
+	front = NULL;
+	while (lst)
 	{
-		str[j++] = s1[i];
-		i++;
+		aux = ft_lstnew_bonus((*f)(lst->content));
+		if (aux)
+		{
+			while (front)
+			{
+				aux = front->next;
+				(*del)(front->content);
+				free(front);
+				front = aux;
+			}
+			lst = NULL;
+			return (NULL);
+		}
+		ft_lstadd_back_bonus(&front, aux);
+		lst = lst->next;
 	}
-	i = 0;
-	while (s2[i])
-	{
-		str[j++] = s2[i];
-		i++;
-	}
-	str[j] = 0;
-	return (str);
+	return (front);
 }

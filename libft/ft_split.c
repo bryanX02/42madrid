@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/27 10:43:42 by bquilumb          #+#    #+#             */
+/*   Updated: 2023/11/27 10:44:55 by bquilumb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -17,7 +28,7 @@ static int	num_words(char const *s, char c)
 	return (word_num);
 }
 
-static int	split_words(char **result, char const *s, char c, int word)
+static int	spliter(char **result, char const *s, char c, int word)
 {
 	int		first;
 	int		last;
@@ -55,7 +66,7 @@ char	**ft_split(char const *s, char c)
 	split = malloc(sizeof(char *) * (num_words(s, c) + 1));
 	if (!split)
 		return (NULL);
-	if (!split_words(split, s, c, 0))
+	if (!spliter(split, s, c, 0))
 		return (NULL);
 	return (split);
 }

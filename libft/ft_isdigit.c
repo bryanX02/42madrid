@@ -6,16 +6,16 @@
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:32:37 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/24 15:19:12 by bquilumb         ###   ########.fr       */
+/*   Updated: 2023/11/27 10:32:20 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
-    int	boolean;
+	int	boolean;
 
 	boolean = 1;
-	if (!(str >= 48 && str <= 57))
+	if (!(c >= 48 && c <= 57))
 		boolean = 0;
 	return (boolean);
 }
