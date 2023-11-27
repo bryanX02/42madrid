@@ -13,7 +13,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -23,7 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int		it_atoi(const char *str);
+int		ft_atoi(const char *str);
 
 void	ft_bzero(void *s, size_t n);
 
@@ -91,22 +90,22 @@ int		ft_tolower(int c);
 
 int		ft_toupper(int c);
 
-t_list	*ft_lstnew(void *content);
+t_list	*ft_lstnew_bonus(void *content);
 
-int		ft_lstsize(t_list *lst);
+int		ft_lstsize_bonus(t_list *lst);
 
-t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstlast_bonus(t_list *lst);
 
-void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_front_bonus(t_list **lst, t_list *new);
 
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_back_bonus(t_list **lst, t_list *new);
 
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lstdelone_bonus(t_list *lst, void (*del)(void*));
 
-void	ft_lstclear(t_list **lst, void (*del)(void*));
+void	ft_lstclear_bonus_bonus(t_list **lst, void (*del)(void*));
 
-void	ft_lstiter(t_list *lst, void (*f)(void*));
+void	ft_lstiter_bonus(t_list *lst, void (*f)(void*));
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *));
+t_list	*ft_lstmap_bonus(t_list *lst, void *(*f)(void*), void (*del)(void *));
 
 #endif

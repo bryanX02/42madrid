@@ -15,12 +15,13 @@
 int	ft_lstsize_bonus(t_list *lst)
 {
 	int		i;
-	size_t	i;
+	t_list	*aux;
 
 	i = 0;
-	while (lst)
+	aux = lst;
+	while (aux)
 	{
-		lst = lst->next;
+		aux = aux->next;
 		i++;
 	}
 	return (i);

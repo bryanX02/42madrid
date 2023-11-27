@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_printable(int c)
+int	ft_isprint(int c)
 {
 	int	boolean;
 
