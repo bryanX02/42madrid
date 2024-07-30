@@ -1,45 +1,85 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 14:02:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/22 14:02:54 by marvin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "includes/ft_printf.h"
+#include "libft/libft.h"
 
-int	formatparse(const char *format, t_struct *list, va_list ap, int pos)
+t_flags		ft_init_flags(void)
 {
-	while (format[pos] != '\0')
-	{
-		if (format[pos] != '%' && format[pos])
-			list->nprinted += write(1, &format[pos], 1);
-		else if (format[pos] == '%')
-		{
-			if (!ft_strchr(ALLSYMBOLS, format[pos + 1]))
-				break ;
-			while (ft_strchr(ALLSYMBOLS, format[pos + 1]))
-			{
-				pos = pos + 1;
-				if (ft_strchr("cspdiouxXfyb", format[pos]))
-				{
-					pos = arsel2(list, pos, format, ap) + 2;
-					break ;
-				}
-			}
-			else
-				pos = parsel2(list, pos, format, ap);
-		}
-		continue ;
-	}
-	pox++;
-	return (list->nprinted);
+	t_flags		flags;
+
+	flags.dot = -1;
+	flags.minus = 0;
+	flags.star = 0;
+	flags.type = 0;
+	flags.width = 0;
+	flags.zero = 0;
+	return (flags);
 }
 
-int	main(void)
+int			ft_flag_parse(const char *save, int i, t_flags *flags, va_list args)
 {
-	printf("%i", 12);
-	return (0);
+	while (save[i])
+	{
+		if (!ft_isdigit(save[i]) && !ft_is_in_type_list(save[i])
+			&& !ft_is_in_flags_list(save[i]))
+			break ;
+		if (save[i] == '0' && flags->width == 0 && flags->minus == 0)
+			flags->zero = 1;
+		if (save[i] == '.')
+			i = ft_flag_dot(save, i, flags, args);
+		if (save[i] == '-')
+			*flags = ft_flag_minus(*flags);
+		if (save[i] == '*')
+			*flags = ft_flag_width(args, *flags);
+		if (ft_isdigit(save[i]))
+			*flags = ft_flag_digit(save[i], *flags);
+		if (ft_is_in_type_list(save[i]))
+		{
+			flags->type = save[i];
+			break ;
+		}
+		i++;
+	}
+	return (i);
+}
+
+int			ft_treat_save(const char *save, va_list args)
+{
+	int			i;
+	t_flags		flags;
+	int			char_count;
+
+	i = 0;
+	char_count = 0;
+	while (1)
+	{
+		flags = ft_init_flags();
+		if (!save[i])
+			break ;
+		else if (save[i] == '%' && save[i + 1])
+		{
+			i = ft_flag_parse(save, ++i, &flags, args);
+			if (ft_is_in_type_list(save[i]))
+				char_count += ft_treatment((char)flags.type, flags, args);
+			else if (save[i])
+				char_count += ft_putchar(save[i]);
+		}
+		else if (save[i] != '%')
+			char_count += ft_putchar(save[i]);
+		i++;
+	}
+	return (char_count);
+}
+
+int			ft_printf(const char *input, ...)
+{
+	const char	*save;
+	va_list		args;
+	int			char_count;
+
+	save = ft_strdup(input);
+	char_count = 0;
+	va_start(args, input);
+	char_count += ft_treat_save(save, args);
+	va_end(args);
+	free((char *)save);
+	return (char_count);
 }

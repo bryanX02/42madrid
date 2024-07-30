@@ -1,42 +1,66 @@
-# Features
-NAME		= libft.exe
-LIBFT_PATH	= ./libft
-LIBFT		= ./libft/libft.exe
+LIBFT = ./libft/libft.a
 
-SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
-					ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
-					ft_itoa.c ft_memcpy.c  ft_putendl_fd.c ft_strchr.c  ft_strlcpy.c \
-					ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c ft_memccpy.c \
-					ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
-					ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
-					ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c
-OBJS			= $(SRCS:.c=.exe)
+N_TEMP = temp.a
 
-BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
-					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
-					ft_lstmap.c ft_lstnew.c ft_lstsize.c
-BONUS_OBJS		= $(BONUS:.c=.exe)
+NAME = libftprintf.a
 
-CC				= g++
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I.
+SRCS =  ft_printf.c \
+		src/ft_treatment.c \
+		src/ft_treat_width.c \
+		src/ft_u_itoa.c \
+		src/ft_ull_base.c \
+		src/ft_putchar.c \
+		src/ft_str_tolower.c \
+		src/ft_putstrprec.c \
+		src/ft_treat_string.c \
+		src/ft_treat_char.c \
+		src/ft_treat_pointer.c \
+		src/ft_treat_int.c \
+		src/ft_treat_uint.c \
+		src/ft_treat_percent.c \
+		src/ft_treat_hexa.c \
+		src/ft_treat_flags.c 
+		
+SURPL_O = 	ft_treat_width.o \
+			ft_treatment.o \
+			ft_treat_width.o \
+			ft_u_itoa.o \
+			ft_ull_base.o \
+			ft_putchar.o \
+			ft_str_tolower.o \
+			ft_putstrprec.o \
+			ft_treat_string.o \
+			ft_treat_char.o \
+			ft_treat_pointer.o \
+			ft_treat_int.o \
+			ft_treat_uint.o \
+			ft_treat_percent.o \
+			ft_treat_hexa.o \
+			ft_treat_flags.o  
 
+CC = gcc
 
+FLAGS = -c -Wall -Wextra -Werror
 
-all:			$(NAME)
+INCLUDES = -I./includes
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+OBJS = $(SRCS:.c=.o)
 
-clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
+$(NAME): $(OBJS)
+	$(MAKE) bonus -C ./libft
+	cp libft/libft.a $(NAME)
+	$(CC) $(FLAGS) $(INCLUDES) $(SRCS)
+	ar -rcs $(NAME) $(OBJS)
 
-fclean:			clean
-				$(RM) $(NAME)
+all : $(NAME)
 
-re:				fclean $(NAME)
+clean :
+	$(MAKE) clean -C ./libft
+	rm -rf $(SURPL_O) 
+	rm -rf $(OBJS)
 
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+fclean : clean
+	$(MAKE) fclean -C ./libft
+	rm -rf $(NAME)
 
-.PHONY:			all clean fclean re bonus
+re : fclean all
