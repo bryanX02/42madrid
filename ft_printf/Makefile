@@ -1,66 +1,44 @@
-LIBFT = ./libft/libft.a
-
-N_TEMP = temp.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/31 14:42:24 by bquilumb          #+#    #+#              #
+#    Updated: 2024/07/31 14:42:26 by bquilumb         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS =  ft_printf.c \
-		src/ft_treatment.c \
-		src/ft_treat_width.c \
-		src/ft_u_itoa.c \
-		src/ft_ull_base.c \
-		src/ft_putchar.c \
-		src/ft_str_tolower.c \
-		src/ft_putstrprec.c \
-		src/ft_treat_string.c \
-		src/ft_treat_char.c \
-		src/ft_treat_pointer.c \
-		src/ft_treat_int.c \
-		src/ft_treat_uint.c \
-		src/ft_treat_percent.c \
-		src/ft_treat_hexa.c \
-		src/ft_treat_flags.c 
-		
-SURPL_O = 	ft_treat_width.o \
-			ft_treatment.o \
-			ft_treat_width.o \
-			ft_u_itoa.o \
-			ft_ull_base.o \
-			ft_putchar.o \
-			ft_str_tolower.o \
-			ft_putstrprec.o \
-			ft_treat_string.o \
-			ft_treat_char.o \
-			ft_treat_pointer.o \
-			ft_treat_int.o \
-			ft_treat_uint.o \
-			ft_treat_percent.o \
-			ft_treat_hexa.o \
-			ft_treat_flags.o  
+SRC	=	ft_printf.c		\
+		ft_putchar.c	\
+		ft_putstr.c		\
+		ft_putnbr.c		\
+		ft_putunint.c	\
+		ft_hexptr.c		\
+		ft_putptr.c		\
+		ft_strptr.c		\
+
+OBJS = $(SRC:.c=.o)
 
 CC = gcc
-
-FLAGS = -c -Wall -Wextra -Werror
-
-INCLUDES = -I./includes
-
-OBJS = $(SRCS:.c=.o)
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -rf
+AR = ar crs
 
 $(NAME): $(OBJS)
-	$(MAKE) bonus -C ./libft
-	cp libft/libft.a $(NAME)
-	$(CC) $(FLAGS) $(INCLUDES) $(SRCS)
-	ar -rcs $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 
-all : $(NAME)
+all: $(NAME)
 
-clean :
-	$(MAKE) clean -C ./libft
-	rm -rf $(SURPL_O) 
-	rm -rf $(OBJS)
+clean:
+	$(RM) $(OBJS)
 
-fclean : clean
-	$(MAKE) fclean -C ./libft
-	rm -rf $(NAME)
+fclean:	clean
+	$(RM) $(NAME)		
 
-re : fclean all
+re:	fclean all
+
+.PHONY:	all clean fclean re

@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_hexptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 10:34:30 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/27 10:34:49 by bquilumb         ###   ########.fr       */
+/*   Created: 2024/07/31 14:41:19 by bquilumb          #+#    #+#             */
+/*   Updated: 2024/07/31 14:41:24 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_hexptr(unsigned int num, size_t *counter, char *base)
 {
-	const char	ln = '\n';
+	char	*str;
 
-	write(fd, s, ft_strlen(s));
-	write(fd, &ln, 1);
+	str = ft_strptr(num, base);
+	ft_putstr(str, counter);
+	free(str);
 }

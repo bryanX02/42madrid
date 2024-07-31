@@ -1,85 +1,60 @@
-#include "includes/ft_printf.h"
-#include "libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 13:47:32 by bquilumb          #+#    #+#             */
+/*   Updated: 2024/07/31 13:48:42 by bquilumb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_flags		ft_init_flags(void)
+#include "ft_printf.h"
+
+void	ft_format(va_list va, char *str, size_t *counter)
 {
-	t_flags		flags;
-
-	flags.dot = -1;
-	flags.minus = 0;
-	flags.star = 0;
-	flags.type = 0;
-	flags.width = 0;
-	flags.zero = 0;
-	return (flags);
-}
-
-int			ft_flag_parse(const char *save, int i, t_flags *flags, va_list args)
-{
-	while (save[i])
+	if (*str == 'c')
+		ft_putchar(va_arg(va, int), counter);
+	else if (*str == 's')
+		ft_putstr(va_arg(va, char *), counter);
+	else if (*str == 'p')
+		ft_putptr(va_arg(va, void *), counter);
+	else if (*str == 'i' || *str == 'd')
+		ft_putnbr(va_arg(va, int), counter);
+	else if (*str == 'u')
+		ft_putunint(va_arg(va, unsigned int), counter);
+	else if (*str == 'x' || *str == 'X')
 	{
-		if (!ft_isdigit(save[i]) && !ft_is_in_type_list(save[i])
-			&& !ft_is_in_flags_list(save[i]))
-			break ;
-		if (save[i] == '0' && flags->width == 0 && flags->minus == 0)
-			flags->zero = 1;
-		if (save[i] == '.')
-			i = ft_flag_dot(save, i, flags, args);
-		if (save[i] == '-')
-			*flags = ft_flag_minus(*flags);
-		if (save[i] == '*')
-			*flags = ft_flag_width(args, *flags);
-		if (ft_isdigit(save[i]))
-			*flags = ft_flag_digit(save[i], *flags);
-		if (ft_is_in_type_list(save[i]))
-		{
-			flags->type = save[i];
-			break ;
-		}
-		i++;
+		if (*str == 'x')
+			ft_hexptr(va_arg(va, unsigned int), counter, LOW_HEX);
+		else
+			ft_hexptr(va_arg(va, unsigned int), counter, UP_HEX);
 	}
-	return (i);
+	else if (*str == '%')
+		ft_putchar(*str, counter);
 }
 
-int			ft_treat_save(const char *save, va_list args)
+int	ft_printf(char const *str, ...)
 {
-	int			i;
-	t_flags		flags;
-	int			char_count;
+	va_list		va;
+	size_t		cont;
 
-	i = 0;
-	char_count = 0;
-	while (1)
+	if (!str)
+		return (0);
+	cont = 0;
+	va_start(va, str);
+	while (*str)
 	{
-		flags = ft_init_flags();
-		if (!save[i])
-			break ;
-		else if (save[i] == '%' && save[i + 1])
+		if (*str == '%')
 		{
-			i = ft_flag_parse(save, ++i, &flags, args);
-			if (ft_is_in_type_list(save[i]))
-				char_count += ft_treatment((char)flags.type, flags, args);
-			else if (save[i])
-				char_count += ft_putchar(save[i]);
+			str++;
+			ft_format(va, (char *)str, &cont);
 		}
-		else if (save[i] != '%')
-			char_count += ft_putchar(save[i]);
-		i++;
+		else
+			ft_putchar(*str, &cont);
+		str++;
 	}
-	return (char_count);
-}
-
-int			ft_printf(const char *input, ...)
-{
-	const char	*save;
-	va_list		args;
-	int			char_count;
-
-	save = ft_strdup(input);
-	char_count = 0;
-	va_start(args, input);
-	char_count += ft_treat_save(save, args);
-	va_end(args);
-	free((char *)save);
-	return (char_count);
+	va_end(va);
+	return (cont);
 }

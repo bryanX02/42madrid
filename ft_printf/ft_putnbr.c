@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 10:52:23 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/27 10:53:23 by bquilumb         ###   ########.fr       */
+/*   Created: 2024/07/31 14:43:03 by bquilumb          #+#    #+#             */
+/*   Updated: 2024/07/31 14:43:06 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_putnbr(int nb, size_t *fd)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	unsigned int	digit;
 
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
+	if (nb < 0)
 	{
-		str[j++] = s1[i];
-		i++;
+		ft_putchar('-', fd);
+		digit = (unsigned int)(nb * -1);
 	}
-	i = 0;
-	while (s2[i])
-	{
-		str[j++] = s2[i];
-		i++;
-	}
-	str[j] = 0;
-	return (str);
+	else
+		digit = (unsigned int)nb;
+	if (digit >= 10)
+		ft_putnbr(digit / 10, fd);
+	ft_putchar((char)(digit % 10 + 48), fd);
 }

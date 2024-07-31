@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 15:34:33 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/28 12:41:23 by bquilumb         ###   ########.fr       */
+/*   Created: 2024/07/31 14:43:20 by bquilumb          #+#    #+#             */
+/*   Updated: 2024/07/31 15:09:55 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	ft_putptr(void *ptr, size_t *counter)
 {
-	void	*aux;
+	char			*str;
+	unsigned long	ptrdir;
 
-	if (!dst && !src)
-		return (dst);
-	aux = dst;
-	while (n > 0)
+	if (ptr == NULL)
 	{
-		*(char *)aux = *(char *)src;
-		aux++;
-		src++;
-		n--;
+		ft_putstr("(nil)", counter);
+		return ;
 	}
-	return (dst);
+	ptrdir = (unsigned long)ptr;
+	ft_putstr("0x", counter);
+	str = ft_strptr(ptrdir, LOW_HEX);
+	ft_putstr(str, counter);
+	free(str);
 }

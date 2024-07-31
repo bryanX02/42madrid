@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putunint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bquilumb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 15:34:01 by bquilumb          #+#    #+#             */
-/*   Updated: 2023/11/28 12:36:21 by bquilumb         ###   ########.fr       */
+/*   Created: 2024/07/31 14:44:03 by bquilumb          #+#    #+#             */
+/*   Updated: 2024/07/31 14:44:05 by bquilumb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memset(void *str, int c, size_t size)
+void	ft_putunint(unsigned int num, size_t *counter)
 {
-	void	*aux;
+	char	*str;
 
-	aux = str;
-	while (size > 0)
-	{
-		*(unsigned char *)str = (unsigned char)c;
-		str ++;
-		size --;
-	}
-	return (aux);
+	str = ft_strptr(num, "0123456789");
+	ft_putstr(str, counter);
+	free(str);
 }
